@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module Helper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <h2>Module Helper</h2>
+    <form id="form" action="/list" method="POST">
+        <select id="select-em" name = "name">
+          <option disabled selected value> -- select an option -- </option>
+          {% for i in options %}
+            <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+        <input type="submit" value="Go">
+    </form>
+    <br>
+    <hr class="solid">
+    <br>
+    {% if data is defined %}
+    <div class="container-fluid">
+    <form action="/info" method="POST">
+    <div class="row">
+        {% for i in data %}
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{i}}</h5>
+              <p class="card-text">version : {{data[i]}}</p>
+              <input type="submit" name="{{i}}" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    </form>
+    </div>
+    {% endif %}
+</body>
+</html>
+
